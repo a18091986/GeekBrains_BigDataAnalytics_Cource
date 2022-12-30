@@ -1,1 +1,1 @@
-# GeekBrains_BigDataAnalytics_Cource
+# GeekBrains_BigDataAnalytics_Course
