@@ -1,0 +1,3 @@
+mysqldump -u admin -p database > file
+
+mysql -u root -p ${DBNAME} < /tmp/dump.sql

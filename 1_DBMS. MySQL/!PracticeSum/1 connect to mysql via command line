@@ -1,0 +1,6 @@
+Подключение к mysql из коммандной строки:
+- прописать в PATH путь к mysql.exe 
+- C:\Program Files\MySQL\MySQL Server 8.0\bin
+- настроить через Workbench доступ пользователя к localhost и 192.168.2...
+- подключение mysql -u root -p
+- или с удаленной машины mysql -u root -h 192.168.2.165...
