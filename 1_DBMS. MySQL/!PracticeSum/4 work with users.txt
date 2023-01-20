@@ -39,4 +39,10 @@ GRANT ALL PRIVILEGES ON * . * TO 'test_user'@'localhost';
 
 GRANT ALL PRIVILEGES ON * . * TO 'test_user'@'localhost' WITH GRANT OPTION;
 
+Starting with MySQL 8 you no longer can (implicitly) create a user using the GRANT command. Use CREATE USER instead, followed by the GRANT statement:
+
+mysql> CREATE USER 'root'@'%' IDENTIFIED BY 'PASSWORD';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql> FLUSH PRIVILEGES;
+
 Теперь этот пользователь является суперпользователем для MySQL и, авторизовавшись от его имени в PhpMyAdmin, вы можете делать всё то же самое, что и с  помощью root.
