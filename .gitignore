@@ -1,0 +1,7 @@
+**/.idea
+**/venv
+**/DATA
+**/sprints
+**/__pycache__
+*.csv
+
