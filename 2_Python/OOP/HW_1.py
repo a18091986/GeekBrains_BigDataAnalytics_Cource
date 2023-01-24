@@ -48,7 +48,6 @@
 
 """
 
-
 # class Road:
 #
 #     def __init__(self, length, width):
@@ -112,9 +111,80 @@
 выведите результат. Вызовите методы и покажите результат.
 """
 
+#
+# class Car:
+#     def __init__(self, speed, color, name, is_police):
+#         self.speed = speed
+#         self.color = color
+#         self.name = name
+#         self.is_police = is_police
+#
+#     def go(self):
+#         print(f"{self.name} поехала")
+#
+#     def stop(self):
+#         print(f"{self.name} остановилась")
+#         self.speed = 0
+#
+#     def turn(self, direction):
+#         print(f"{self.name} повернула {direction}")
+#
+#     def show_speed(self):
+#         print(f"Текущая скорость {self.speed}")
+#
+#     def print_info(self):
+#         print(f"{self.name}:\n  - скорость: {self.speed}\n  - цвет: {self.color}\n  - полиция: {self.is_police}")
+#
+#
+# class TownCar(Car):
+#     def show_speed(self):
+#         super().show_speed()
+#         if self.speed > 60:
+#             print(f"{self.name}: превышение скорости")
+#
+#
+# class WorkCar(Car):
+#     def show_speed(self):
+#         super().show_speed()
+#         if self.speed > 40:
+#             print(f"{self.name}: превышение скорости")
+#
+#
+# small_car = Car(100, "yellow", "audi", False)
+# small_car.go()
+# small_car.turn("Left")
+# small_car.turn("Right")
+# small_car.show_speed()
+# small_car.print_info()
+#
+# police_car = Car(80, "yellow", "police", True)
+# police_car.go()
+# police_car.turn("Left")
+# police_car.turn("Right")
+# police_car.show_speed()
+# police_car.print_info()
+#
+# town_car = TownCar(80, "green", "towncar", True)
+# town_car.go()
+# town_car.turn("Left")
+# town_car.turn("Right")
+# town_car.show_speed()
+# town_car.print_info()
+#
+# work_car = WorkCar(50, "green", "workcar", True)
+# work_car.go()
+# work_car.turn("Left")
+# work_car.turn("Right")
+# work_car.show_speed()
+# work_car.print_info()
+#
+# work_car_1 = WorkCar(40, "green", "workcar_1", True)
+# work_car_1.go()
+# work_car_1.turn("Left")
+# work_car_1.turn("Right")
+# work_car_1.show_speed()
+# work_car_1.print_info()
 
-class Car:
-    pass
 
 
 """
@@ -129,6 +199,36 @@ class Car:
 """
 
 
-class Stationery:
-    pass
+# class Stationery:
+#     def __init__(self, title):
+#         self.title = title
+#
+#     def draw(self):
+#         print("Запуск отрисовки")
+#
+#
+# class Pen(Stationery):
+#     def draw(self):
+#         super().draw()
+#         print("Ручка")
+#
+#
+# class Pencil(Stationery):
+#     def draw(self):
+#         super().draw()
+#         print("Карандаш")
+#
+#
+# class Handle(Stationery):
+#     def draw(self):
+#         super().draw()
+#         print("Маркер")
+#
+#
+# pen = Pen("ручка")
+# pen.draw()
+# pencil = Pencil("карандаш")
+# pencil.draw()
+# handle = Handle("маркер")
+# handle.draw()
 
