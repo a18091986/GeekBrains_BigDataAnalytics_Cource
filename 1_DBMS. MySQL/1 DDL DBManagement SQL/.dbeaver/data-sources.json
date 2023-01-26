@@ -1,0 +1,31 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-185b70e793b-4b08f04f7d8a08e8": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "192.168.2.165",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.2.165",
+				"port": "3306",
+				"url": "jdbc:mysql://192.168.2.165:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Разработка",
+			"color": "255,255,255",
+			"description": "База данных для разработки",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
