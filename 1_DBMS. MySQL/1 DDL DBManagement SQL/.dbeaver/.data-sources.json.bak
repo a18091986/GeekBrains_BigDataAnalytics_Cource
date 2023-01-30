@@ -1,0 +1,55 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-185b70e793b-4b08f04f7d8a08e8": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "192.168.2.165",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.2.165",
+				"port": "3306",
+				"url": "jdbc:mysql://192.168.2.165:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"sqlite_jdbc-185fd44cb34-4cec88be32e334b9": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "vk.db",
+			"save-password": true,
+			"configuration": {
+				"database": "C:\\Users\\admin\\Desktop\\!Actual GIT\\GeekBrains_BigDataAnalytics_Cource\\1_DBMS. MySQL\\2 DB Design\\sqlite3_db\\vk.db",
+				"url": "jdbc:sqlite:C:\\Users\\admin\\Desktop\\!Actual GIT\\GeekBrains_BigDataAnalytics_Cource\\1_DBMS. MySQL\\2 DB Design\\sqlite3_db\\vk.db",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		}
+	},
+	"virtual-models": {
+		"sqlite_jdbc-185fd44cb34-4cec88be32e334b9": {
+			":users": {
+				"properties": {
+					"erd.diagram.state": {
+						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301253\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"users\" fq-name\u003d\"users\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"542\" y\u003d\"190\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
+					}
+				}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Разработка",
+			"color": "255,255,255",
+			"description": "База данных для разработки",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
