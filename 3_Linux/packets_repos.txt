@@ -1,0 +1,17 @@
+dpkg - debian packet manager 
+dpkg -l | grep "^ii"
+
+
+apt-get update 
+
+apt-cache search server | grep ....
+
+systemctl status apache2
+
+ss -tnlp // посмотреть список процессов-портов
+
+ip a
+
+ps -efl | grep apache2 - выяснить откуда запущен
+
+man apache2 - /config /etc/apache2

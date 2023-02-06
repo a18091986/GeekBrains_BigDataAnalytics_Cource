@@ -1,0 +1,38 @@
+sudo apt-get update
+
+sudo apt install docker.io
+
+sudo snap install docker
+
+sudo docker run hello-world
+
+sudo docker images
+
+sudo docker ps -a
+
+sudo docker ps
+
+sudo docker image ls - посмотреть какие контейнеры присутствуют в системе
+
+sudo docker search find_name - поиск по репозиторию докер
+
+sudo docker pull nginx - получение образа из репозитория
+
+sudo docker run -d --name nginx -p 80:80 nginx
+sudo docker run -d --name nginx -p 80:80 -v path_local:path_container nginx
+
+sudo docker exec -ti nginx /bin/bash
+
+sudo docker stop nginx
+
+sudo docker start nginx
+
+sudo docker rm -f nginx
+
+создание образа на основе контейнера????
+
+
+
+
+
+
