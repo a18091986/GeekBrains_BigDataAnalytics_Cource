@@ -15,3 +15,7 @@ ip a
 ps -efl | grep apache2 - выяснить откуда запущен
 
 man apache2 - /config /etc/apache2
+
+
+
+
