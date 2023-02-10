@@ -14,6 +14,9 @@
 				"home": "mysql_client",
 				"type": "dev",
 				"auth-model": "native"
+			},
+			"custom-properties": {
+				"SQLEditor.outputPanel.autoShow": "false"
 			}
 		},
 		"sqlite_jdbc-185fd44cb34-4cec88be32e334b9": {
@@ -37,8 +40,7 @@
 					"erd.diagram.state": {
 						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301253\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"users\" fq-name\u003d\"users\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"542\" y\u003d\"190\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
 					}
-				},
-				"constraints": {}
+				}
 			},
 			":profiles": {
 				"properties": {
