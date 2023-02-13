@@ -1,5 +1,5 @@
 [mysql]
 user=root
-password=0gfyfctyr0MYSQL
+password=
 
 создать файл my.cnf и положить его в С:\ для доступа без пароля
