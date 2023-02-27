@@ -17,7 +17,7 @@ def my_print(msg: str, color='green', separator_sym="*", separator_before=False,
 
 
 def my_factorial(n: int) -> int:
-    '''подсчет факториала числа n'''
+    """Подсчет факториала числа n"""
     if n == 0:
         return 1
     else:
@@ -25,14 +25,16 @@ def my_factorial(n: int) -> int:
 
 
 def my_combinations(n: int, k: int) -> int:
-    '''подсчет числа сочетаний из n элементов по k'''
+    """Подсчет числа сочетаний из n элементов по k"""
     return int(my_factorial(n) / (my_factorial(k) * my_factorial(n - k)))
 
+
 def my_arrangements(n: int, k: int) -> int:
-    '''подсчет числа размещений из n элементов по k'''
+    """Подсчет числа размещений из n элементов по k"""
     return int(my_factorial(n) / (my_factorial(n - k)))
 
+
 def my_permutations(n: int) -> int:
-    '''подсчет числа перестановок из n элементов'''
+    """Подсчет числа перестановок из n элементов"""
     return my_arrangements(n, n)
 
