@@ -31,6 +31,36 @@
 				"type": "dev",
 				"auth-model": "native"
 			}
+		},
+		"mysql8-1864d01a52a-65be454f65138637": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "192.168.2.159",
+			"save-password": true,
+			"configuration": {
+				"host": "192.168.2.159",
+				"port": "3306",
+				"url": "jdbc:mysql://192.168.2.159:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"mysql8-1864d01ed61-6bc2a60995873683": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "46.8.219.63",
+			"save-password": true,
+			"configuration": {
+				"host": "46.8.219.63",
+				"port": "3306",
+				"url": "jdbc:mysql://46.8.219.63:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
 		}
 	},
 	"virtual-models": {
@@ -46,6 +76,15 @@
 				"properties": {
 					"erd.diagram.state": {
 						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301314\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"profiles\" fq-name\u003d\"profiles\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"545\" y\u003d\"55\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
+					}
+				}
+			}
+		},
+		"mysql8-1864d01ed61-6bc2a60995873683": {
+			"my_notes": {
+				"@properties": {
+					"erd.diagram.state": {
+						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202302140213\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"mysql8-1864d01ed61-6bc2a60995873683\"\u003e\u003centity id\u003d\"1\" name\u003d\"note_tag\" fq-name\u003d\"my_notes.note_tag\" order\u003d\"0\" x\u003d\"20\" y\u003d\"134\"\u003e\u003cpath name\u003d\"my_notes\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"2\" name\u003d\"notes\" fq-name\u003d\"my_notes.notes\" order\u003d\"1\" x\u003d\"135\" y\u003d\"20\"\u003e\u003cpath name\u003d\"my_notes\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"3\" name\u003d\"notes_result\" fq-name\u003d\"my_notes.notes_result\" order\u003d\"2\" x\u003d\"135\" y\u003d\"323\"\u003e\u003cpath name\u003d\"my_notes\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"4\" name\u003d\"subjects\" fq-name\u003d\"my_notes.subjects\" order\u003d\"3\" x\u003d\"330\" y\u003d\"67\"\u003e\u003cpath name\u003d\"my_notes\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"5\" name\u003d\"tags\" fq-name\u003d\"my_notes.tags\" order\u003d\"4\" x\u003d\"135\" y\u003d\"219\"\u003e\u003cpath name\u003d\"my_notes\"/\u003e\u003c/entity\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations\u003e\u003crelation name\u003d\"note_tag_ibfk_1\" fq-name\u003d\"my_notes.note_tag.note_tag_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"1\"/\u003e\u003crelation name\u003d\"notes_ibfk_1\" fq-name\u003d\"my_notes.notes.notes_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"4\" fk-ref\u003d\"2\"/\u003e\u003crelation name\u003d\"note_tag_ibfk_2\" fq-name\u003d\"my_notes.note_tag.note_tag_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"5\" fk-ref\u003d\"1\"/\u003e\u003c/relations\u003e\u003c/diagram\u003e"
 					}
 				}
 			}
