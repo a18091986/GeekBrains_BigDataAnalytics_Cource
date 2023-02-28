@@ -1,6 +1,6 @@
 import numpy as np
-from Practice.utils import my_print, my_combinations, my_arrangements
-
+from utils import my_print, my_combinations, my_arrangements
+ 
 # -------------------------------------------------------------------------------------------
 test_array = np.random.randint(0, 10, 1000000)
 
