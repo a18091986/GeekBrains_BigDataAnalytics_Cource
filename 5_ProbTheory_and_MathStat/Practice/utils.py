@@ -47,6 +47,17 @@ def my_permutations(n: int) -> int:
     return my_arrangements(n, n)
 
 
+def full_probability(prob_list: list, cond_prob_list: list) -> float:
+    return (np.array(prob_list)*np.array(cond_prob_list)).sum()
+
+def conditional_probability(prob_1: float, prob_2: float, cond_prob_1_2: float) -> float:
+    """"Рассчитывает условную вероятность события 2 при условии события 1
+    prob_2 - вероятность события 2
+    prob_1 - вероятность события 1
+    cond_prob_1_2 - вероятность события 1 при условии 2
+    """
+    return prob_2 * cond_prob_1_2 / prob_1
+
 def probability_in_binomial_distribution(k: int, n: int, p: float) -> float:
     """"Возвращает вероятность возникновения случайного события к раз в серии из n экспериментов. p - вероятность
     наступления события A в независимых испытаниях"""
@@ -124,6 +135,7 @@ class RandomSample:
         self.median = self.median_calculate()
         self.moda = self.moda_calculate()
         self.spread = self.sample.max() - self.sample.min()
+        self.quartiles = self.quartiles_calculate()
 
     def __repr__(self):
         return f"Оценка математического ожидания: {self.math_expect}\n" \
@@ -133,7 +145,8 @@ class RandomSample:
                f"Смещенная оценка СКО: {self.std_biased}\n" \
                f"Медиана: {self.median}\n" \
                f"Мода: {self.moda}\n" \
-               f"Размах: {self.spread}\n"
+               f"Размах: {self.spread}\n" \
+               f"Квартили: {self.quartiles}\n"
 
     def __str__(self):
         return f"Оценка математического ожидания: {self.math_expect}\n" \
@@ -143,7 +156,8 @@ class RandomSample:
                f"Смещенная оценка СКО: {self.std_biased}\n" \
                f"Медиана: {self.median}\n" \
                f"Мода: {self.moda}\n" \
-               f"Размах: {self.spread}\n"
+               f"Размах: {self.spread}\n" \
+               f"Квартили: {self.quartiles}\n"
 
     def math_expect_calculate(self):
         return sum(self.sample) / len(self.sample)
@@ -171,3 +185,19 @@ class RandomSample:
 
     def moda_calculate(self):
         return np.argmax(np.bincount(self.sample))
+
+    def percentiles_calculate(self, percentiles: list):
+        result = []
+        sample = sorted(self.sample.copy())
+        for percentile in [x / 100 for x in percentiles]:
+            temp = percentile * len(sample)
+            if int(temp) == temp:
+                temp = int(temp)
+                result.append((sample[temp-1] + sample[temp]) / 2)
+            else:
+                print(temp)
+                result.append((sample[int(temp) - 1] + sample[int(temp)]) / 2)
+        return result
+
+    def quartiles_calculate(self):
+        return self.percentiles_calculate([25, 50, 75])
