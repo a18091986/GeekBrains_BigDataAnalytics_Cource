@@ -1,5 +1,5 @@
 import math
-
+import numpy as np
 from colorama import Fore, Style
 
 
@@ -20,6 +20,7 @@ def my_print(msg: str, color='green', separator_sym="*", separator_before=False,
     if separator_after:
         print(f"{Fore.RED}{separator_sym * 300}{Style.RESET_ALL}")
 
+
 # ------------------------------------------------math--------------------------------------------------
 
 
@@ -28,7 +29,7 @@ def my_factorial(n: int) -> int:
     if n == 0:
         return 1
     else:
-        return n * my_factorial(n-1)
+        return n * my_factorial(n - 1)
 
 
 def my_combinations(n: int, k: int) -> int:
@@ -52,6 +53,7 @@ def probability_in_binomial_distribution(k: int, n: int, p: float) -> float:
     q = 1 - p
     return my_combinations(n, k) * pow(p, k) * pow(q, n - k)
 
+
 def probability_in_puasson_distribution(lamb: float, m: int) -> float:
     """Возвращает вероятность возникновения случайного события m раз за фиксированную единицу измерения
     количества/времени"""
@@ -66,6 +68,7 @@ class BinomialRandomValue:
     n - количество испытаний
     p - вероятность наступления события в одном испытании
     """
+
     def __init__(self, n: int, p: float):
         self.n = n
         self.p = p
@@ -90,6 +93,7 @@ class PuassonRandomValue:
     """определяет класс дискретных случайных величин, распределенных по закону Пуассона
     lamb - средняя интенсивность наступления событий в единицу измерения
     """
+
     def __init__(self, n=None, p=None, lamb=None):
         if n and p:
             self.lamb = n * p
@@ -107,3 +111,63 @@ class PuassonRandomValue:
 
     def __repr__(self):
         return f"М(Х): {self.math_expectation}, D(X): {self.variance}, StandDev: {self.sd}"
+
+
+class RandomSample:
+    def __init__(self, sample: np.array):
+        self.sample = sample
+        self.math_expect = self.math_expect_calculate()
+        self.variance_not_biased = self.variance_calculate(ddof=1)
+        self.variance_biased = self.variance_calculate(ddof=0)
+        self.std_not_biased = self.std_calculate(ddof=1)
+        self.std_biased = self.std_calculate(ddof=0)
+        self.median = self.median_calculate()
+        self.moda = self.moda_calculate()
+        self.spread = self.sample.max() - self.sample.min()
+
+    def __repr__(self):
+        return f"Оценка математического ожидания: {self.math_expect}\n" \
+               f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
+               f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
+               f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
+               f"Смещенная оценка СКО: {self.std_biased}\n" \
+               f"Медиана: {self.median}\n" \
+               f"Мода: {self.moda}\n" \
+               f"Размах: {self.spread}\n"
+
+    def __str__(self):
+        return f"Оценка математического ожидания: {self.math_expect}\n" \
+               f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
+               f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
+               f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
+               f"Смещенная оценка СКО: {self.std_biased}\n" \
+               f"Медиана: {self.median}\n" \
+               f"Мода: {self.moda}\n" \
+               f"Размах: {self.spread}\n"
+
+    def math_expect_calculate(self):
+        return sum(self.sample) / len(self.sample)
+
+    def std_calculate(self, ddof=0):
+        if ddof:
+            result = np.sqrt(self.variance_not_biased)
+        else:
+            result = np.sqrt(self.variance_biased)
+        return result
+
+    def variance_calculate(self, ddof=0):
+        if ddof:
+            result = sum(pow(self.sample - self.math_expect, 2)) / (len(self.sample) - 1)
+        else:
+            result = sum(pow(self.sample - self.math_expect, 2)) / len(self.sample)
+        return result
+
+    def median_calculate(self):
+        if len(self.sample) % 2:
+            result = sorted(self.sample)[len(self.sample) // 2]
+        else:
+            result = (sorted(self.sample)[len(self.sample) // 2 - 1] + sorted(self.sample)[len(self.sample) // 2]) / 2
+        return result
+
+    def moda_calculate(self):
+        return np.argmax(np.bincount(self.sample))
