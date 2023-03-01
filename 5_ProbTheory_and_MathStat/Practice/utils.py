@@ -1,6 +1,7 @@
 import math
 import numpy as np
 from colorama import Fore, Style
+from scipy import stats
 
 
 def my_print(msg: str, color='green', separator_sym="*", separator_before=False, separator_after=False) -> None:
@@ -48,7 +49,8 @@ def my_permutations(n: int) -> int:
 
 
 def full_probability(prob_list: list, cond_prob_list: list) -> float:
-    return (np.array(prob_list)*np.array(cond_prob_list)).sum()
+    return (np.array(prob_list) * np.array(cond_prob_list)).sum()
+
 
 def conditional_probability(prob_1: float, prob_2: float, cond_prob_1_2: float) -> float:
     """"Рассчитывает условную вероятность события 2 при условии события 1
@@ -57,6 +59,7 @@ def conditional_probability(prob_1: float, prob_2: float, cond_prob_1_2: float) 
     cond_prob_1_2 - вероятность события 1 при условии 2
     """
     return prob_2 * cond_prob_1_2 / prob_1
+
 
 def probability_in_binomial_distribution(k: int, n: int, p: float) -> float:
     """"Возвращает вероятность возникновения случайного события к раз в серии из n экспериментов. p - вероятность
@@ -193,7 +196,7 @@ class RandomSample:
             temp = percentile * len(sample)
             if int(temp) == temp:
                 temp = int(temp)
-                result.append((sample[temp-1] + sample[temp]) / 2)
+                result.append((sample[temp - 1] + sample[temp]) / 2)
             else:
                 print(temp)
                 result.append((sample[int(temp) - 1] + sample[int(temp)]) / 2)
@@ -201,3 +204,39 @@ class RandomSample:
 
     def quartiles_calculate(self):
         return self.percentiles_calculate([25, 50, 75])
+
+
+class NormalDistributionRandomValue:
+    def __init__(self, mu: float, sigma: float):
+        self.mu = mu
+        self.sigma = sigma
+        self.var = self.sigma ** 2
+
+    def distribution_density(self, x):
+        s = self.sigma
+        m = self.mu
+        return 1 / (s * np.sqrt(2 * math.pi)) * math.exp(-pow((x - m), 2) / 2 * pow(s, 2))
+
+    def z_calculate(self, x):
+        return round((x - self.mu) / self.sigma, 2)
+
+    def probability_calculate(self, x):
+        return stats.norm.cdf(self.z_calculate(x))
+
+
+class UniformDistributionRandomValue:
+    def __init__(self, left_board: float, right_board: float):
+        self.l = left_board
+        self.r = right_board
+        self.m = self.calculate_math_expect()
+        self.var = self.calculate_variance()
+        self.std = np.sqrt(self.var)
+
+    def calculate_math_expect(self):
+        return (self.l + self.r) / 2
+
+    def calculate_variance(self):
+        return pow((self.r - self.l), 2) / 12
+
+    def probability_calculate(self, x):
+        return (self.r - x) / (self.r - self.l)
