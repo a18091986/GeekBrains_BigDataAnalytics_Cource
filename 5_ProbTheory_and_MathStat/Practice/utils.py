@@ -74,6 +74,44 @@ def probability_in_puasson_distribution(lamb: float, m: int) -> float:
     return (pow(lamb, m) / my_factorial(m)) * math.exp(-lamb)
 
 
+def z_criteria_calculate(sample_mean: float, math_expect: float, std_dev: float, n: int):
+    """рассчитывает z - критерий по выборочному среднему, объему выборки, МО и дисперсии генеральной совокупности"""
+    return (sample_mean - math_expect) / (std_dev / np.sqrt(n))
+
+
+def z_criteria_from_alpha(alpha: float):
+    """рассчитывает z - критерий по уровню значимости"""
+    return stats.norm.ppf(1 - alpha)
+
+def t_criteria_from_alpha(alpha: float, n: int):
+    """рассчитывает t - критерий по уровню значимости"""
+    return stats.t.ppf(1 - alpha, df=n-1)
+
+def t_criteria_calculate(sample_mean: float, math_expect: float, std_dev: float, n: int):
+    return (sample_mean - math_expect) / (std_dev / np.sqrt(n))
+
+
+def p_value_calculate(criteria_value: float, distribution: str, n=None):
+    if distribution == 'norm':
+        return stats.norm.sf(criteria_value)
+    elif distribution == 't':
+        return stats.t.sf(criteria_value, df=n - 1)
+
+
+def conf_interval_calculate(sample_mean: float, alpha: float, side: str, sigma: float, n: int, distribution: str):
+    """
+    calculate confidence interval
+    distribution in ['norm', 't']
+    """
+    if distribution == 'norm':
+        criteria_value = stats.norm.ppf(1 - alpha / 2)
+    elif distribution == 't':
+        criteria_value = stats.t.ppf(df=n - 1, q=1 - alpha / 2)
+    if side == 'two_sided':
+        distance = criteria_value * sigma / np.sqrt(n)
+        return [sample_mean - distance, sample_mean + distance]
+
+
 # ------------------------------------------------classes--------------------------------------------------
 
 
