@@ -140,6 +140,50 @@ def covariance_calculate(x: list, y: list, ddof=0) -> float:
         return math_exp_xy - math_expect_calculate(x) * math_expect_calculate(y)
 
 
+def koef_lin_regres_mnk_method_calculation(x: np.array, y: np.array, intercept=True) -> (float, float):
+    n = len(x)
+    if intercept:
+        b1 = (n * np.sum(x * y) - np.sum(x) * np.sum(y)) / (n * np.sum(x ** 2) - np.sum(x) ** 2)
+        b0 = y.mean() - b1 * x.mean()
+    else:
+        b0 = 0
+        b1 = y.mean() / x.mean()
+    return b0, b1
+
+
+def koef_lin_regr_matrix_method_calculation(x: np.array, y: np.array, intercept=True) -> (float, float):
+    y = y.reshape(len(y), -1)
+    if not intercept:
+        x = x.reshape(len(x), -1)
+    else:
+        x = x.reshape(len(x), -1)
+        x = np.hstack((np.ones_like(x), x))
+    result = np.linalg.inv(np.transpose(x) @ x) @ np.transpose(x) @ y
+    if not intercept:
+        return 0, result[0][0]
+    return result[0][0], result[1][0]
+
+
+def grad_descent(b0_start: float, b1_start: float, x: np.array, y_true: np.array,
+                 lr=0.001, n_epoch=3000, intercept=True) -> (float, float):
+    n = len(y_true)
+    b1 = b1_start
+    if not intercept:
+        b0 = 0
+        for i in range(n_epoch):
+            y_pred = b1 * x
+            derivative_b1 = -2 / n * np.sum(x * (y_true - y_pred))
+            b1 -= lr * derivative_b1
+    else:
+        b0 = b0_start
+        for i in range(n_epoch):
+            y_pred = b0 + b1 * x
+            derivative_b0 = -2 / n * np.sum(y_true - y_pred)
+            derivative_b1 = -2 / n * np.sum(x * (y_true - y_pred))
+            b0 -= lr * derivative_b0
+            b1 -= lr * derivative_b1
+    return b0, b1
+
 # # ------------------------------------------------classes--------------------------------------------------
 #
 #
