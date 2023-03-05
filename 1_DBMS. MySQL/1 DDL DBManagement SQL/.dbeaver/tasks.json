@@ -1,0 +1,66 @@
+{
+	"f2963db5-deeb-48d9-adb6-8affb715f005": {
+		"task": "mysqlDatabaseBackup",
+		"label": "dump",
+		"description": "",
+		"createTime": "202302140203",
+		"updateTime": "202302140203",
+		"state": {
+			"project": "1 DDL DBManagement SQL",
+			"dataSource": "mysql8-185b70e793b-4b08f04f7d8a08e8",
+			"databaseObjects": [
+				"mysql8-185b70e793b-4b08f04f7d8a08e8/my_books"
+			],
+			"clientHomeName": "mysql_client",
+			"export.outputFilePattern": "dump-${database}-${timestamp}.sql",
+			"export.outputFolder": "C:\\Users\\admin\\Desktop\\db",
+			"MySQL.export.method": "NORMAL",
+			"MySQL.export.noCreateStatements": "false",
+			"MySQL.export.addDropStatements": "true",
+			"MySQL.export.disableKeys": "true",
+			"MySQL.export.extendedInserts": "true",
+			"MySQL.export.dumpEvents": "false",
+			"MySQL.export.comments": "false",
+			"MySQL.export.removeDefiner": "false",
+			"MySQL.export.binariesInHex": "false",
+			"MySQL.export.noData": "false",
+			"MySQL.export.showViews": "true",
+			"MySQL.overrideNativeCredentials": "false",
+			"exportObjects": [
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_books"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_events"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_films"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_ideas"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_music"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_notes"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_quotes"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_study"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_tasks"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_tourist_places"
+				},
+				{
+					"catalog": "mysql8-185b70e793b-4b08f04f7d8a08e8/my_wine"
+				}
+			]
+		}
+	}
+}
