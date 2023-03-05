@@ -2,6 +2,7 @@ from Practice.utils import correlation_calculate, covariance_calculate, my_print
     math_expect_calculate, std_calculate
 import numpy as np
 import pandas as pd
+
 # ----------------------------------------------------------------------------------------------------------------
 task = "Даны значения величины заработной платы заемщиков банка (zp) \n" \
        "и значения их поведенческого кредитного скоринга (ks):\n" \
@@ -19,14 +20,12 @@ ks = [401, 574, 874, 919, 459, 739, 653, 902, 746, 832]
 
 df = pd.DataFrame({'zp': zp, 'ks': ks})
 
-
 my_print(f"Ковариация по формуле: {covariance_calculate(zp, ks, ddof=1)}\n"
          f"Ковариация numpy: {np.cov(zp, ks, ddof=1)[0][1]}\n"
          f"Ковариация pandas: {df.cov().values[0, 1]}\n"
          f"Корреляция Пирсона по формуле: {correlation_calculate(zp, ks, ddof=1)}\n"
          f"Корреляция numpy {np.corrcoef(zp, ks, ddof=1)[0][1]}\n"
          f"Корреляция pandas: {df.corr().values[0, 1]}\n", color='синий')
-
 
 # ----------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ task = "Измерены значения IQ выборки студентов, 
 my_print(msg=task, separator_before=True, separator_after=False, color='зеленый')
 sample = [131, 125, 115, 122, 131, 115, 107, 99, 125, 111]
 ci = conf_interval_calculate(math_expect_calculate(sample), alpha=0.05, side='two_sided',
-                        sigma=std_calculate(sample, ddof=1), distribution='t', n=len(sample))
+                             sigma=std_calculate(sample, ddof=1), distribution='t', n=len(sample))
 
 my_print(f"Доверительный интервал: {ci}\n", color='синий')
 
@@ -53,6 +52,6 @@ my_print(msg=task, separator_before=True, separator_after=False, color='зеле
 
 sample = [131, 125, 115, 122, 131, 115, 107, 99, 125, 111]
 ci = conf_interval_calculate(174.2, alpha=0.05, side='two_sided',
-                        sigma=5, distribution='norm', n=27)
+                             sigma=5, distribution='norm', n=27)
 
 my_print(f"Доверительный интервал: {ci}\n", color='синий')
