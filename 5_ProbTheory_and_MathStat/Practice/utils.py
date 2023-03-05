@@ -83,9 +83,11 @@ def z_criteria_from_alpha(alpha: float):
     """рассчитывает z - критерий по уровню значимости"""
     return stats.norm.ppf(1 - alpha)
 
+
 def t_criteria_from_alpha(alpha: float, n: int):
     """рассчитывает t - критерий по уровню значимости"""
-    return stats.t.ppf(1 - alpha, df=n-1)
+    return stats.t.ppf(1 - alpha, df=n - 1)
+
 
 def t_criteria_calculate(sample_mean: float, math_expect: float, std_dev: float, n: int):
     return (sample_mean - math_expect) / (std_dev / np.sqrt(n))
@@ -112,169 +114,195 @@ def conf_interval_calculate(sample_mean: float, alpha: float, side: str, sigma: 
         return [sample_mean - distance, sample_mean + distance]
 
 
-# ------------------------------------------------classes--------------------------------------------------
+def math_expect_calculate(x: list) -> float:
+    return sum(x) / (len(x))
 
 
-class BinomialRandomValue:
-    """определяет класс дискретных случайных величин, распределенных по Биномиальному закону
-    n - количество испытаний
-    p - вероятность наступления события в одном испытании
-    """
-
-    def __init__(self, n: int, p: float):
-        self.n = n
-        self.p = p
-        self.q = 1 - p
-        self.math_expectation = self.n * self.p
-        self.variance = self.n * self.p * self.q
-        self.sd = math.sqrt(self.variance)
-
-    def probability_m(self, m):
-        if self.n >= m >= 0:
-            return my_combinations(self.n, m) * pow(self.p, m) * pow(self.q, self.n - m)
-        elif m < 0:
-            return "Число событий не может быть меньше нуля"
-        else:
-            return "Количество событий не может быть больше числа испытаний"
-
-    def __repr__(self):
-        return f"М(Х): {self.math_expectation}, D(X): {self.variance}, StandDev: {self.sd}"
+def std_calculate(x: list, ddof=0) -> float:
+    sample_mean = math_expect_calculate(x)
+    if ddof:
+        return np.sqrt(sum((np.array(x) - sample_mean) ** 2) / (len(x) - 1))
+    else:
+        return np.sqrt(sum((np.array(x) - sample_mean) ** 2) / (len(x)))
 
 
-class PuassonRandomValue:
-    """определяет класс дискретных случайных величин, распределенных по закону Пуассона
-    lamb - средняя интенсивность наступления событий в единицу измерения
-    """
-
-    def __init__(self, n=None, p=None, lamb=None):
-        if n and p:
-            self.lamb = n * p
-        else:
-            self.lamb = lamb
-        self.math_expectation = self.lamb
-        self.variance = self.lamb
-        self.sd = math.sqrt(self.variance)
-
-    def probability_m(self, m):
-        if m >= 0:
-            return (pow(self.lamb, m) / my_factorial(m)) * math.exp(-self.lamb)
-        else:
-            return "Число событий не может быть меньше нуля"
-
-    def __repr__(self):
-        return f"М(Х): {self.math_expectation}, D(X): {self.variance}, StandDev: {self.sd}"
+def correlation_calculate(x: list, y: list, ddof=0):
+    std_x, std_y = std_calculate(x, ddof), std_calculate(y, ddof)
+    cov = covariance_calculate(x, y, ddof)
+    return cov / (std_x * std_y)
 
 
-class RandomSample:
-    def __init__(self, sample: np.array):
-        self.sample = sample
-        self.math_expect = self.math_expect_calculate()
-        self.variance_not_biased = self.variance_calculate(ddof=1)
-        self.variance_biased = self.variance_calculate(ddof=0)
-        self.std_not_biased = self.std_calculate(ddof=1)
-        self.std_biased = self.std_calculate(ddof=0)
-        self.median = self.median_calculate()
-        self.moda = self.moda_calculate()
-        self.spread = self.sample.max() - self.sample.min()
-        self.quartiles = self.quartiles_calculate()
-
-    def __repr__(self):
-        return f"Оценка математического ожидания: {self.math_expect}\n" \
-               f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
-               f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
-               f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
-               f"Смещенная оценка СКО: {self.std_biased}\n" \
-               f"Медиана: {self.median}\n" \
-               f"Мода: {self.moda}\n" \
-               f"Размах: {self.spread}\n" \
-               f"Квартили: {self.quartiles}\n"
-
-    def __str__(self):
-        return f"Оценка математического ожидания: {self.math_expect}\n" \
-               f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
-               f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
-               f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
-               f"Смещенная оценка СКО: {self.std_biased}\n" \
-               f"Медиана: {self.median}\n" \
-               f"Мода: {self.moda}\n" \
-               f"Размах: {self.spread}\n" \
-               f"Квартили: {self.quartiles}\n"
-
-    def math_expect_calculate(self):
-        return sum(self.sample) / len(self.sample)
-
-    def std_calculate(self, ddof=0):
-        if ddof:
-            result = np.sqrt(self.variance_not_biased)
-        else:
-            result = np.sqrt(self.variance_biased)
-        return result
-
-    def variance_calculate(self, ddof=0):
-        if ddof:
-            result = sum(pow(self.sample - self.math_expect, 2)) / (len(self.sample) - 1)
-        else:
-            result = sum(pow(self.sample - self.math_expect, 2)) / len(self.sample)
-        return result
-
-    def median_calculate(self):
-        if len(self.sample) % 2:
-            result = sorted(self.sample)[len(self.sample) // 2]
-        else:
-            result = (sorted(self.sample)[len(self.sample) // 2 - 1] + sorted(self.sample)[len(self.sample) // 2]) / 2
-        return result
-
-    def moda_calculate(self):
-        return np.argmax(np.bincount(self.sample))
-
-    def percentiles_calculate(self, percentiles: list):
-        result = []
-        sample = sorted(self.sample.copy())
-        for percentile in [x / 100 for x in percentiles]:
-            temp = percentile * len(sample)
-            if int(temp) == temp:
-                temp = int(temp)
-                result.append((sample[temp - 1] + sample[temp]) / 2)
-            else:
-                print(temp)
-                result.append((sample[int(temp) - 1] + sample[int(temp)]) / 2)
-        return result
-
-    def quartiles_calculate(self):
-        return self.percentiles_calculate([25, 50, 75])
+def covariance_calculate(x: list, y: list, ddof=0) -> float:
+    math_exp_xy = math_expect_calculate(list(np.array(x) * np.array(y)))
+    if ddof:
+        return (len(x)) * (math_exp_xy - math_expect_calculate(x) * math_expect_calculate(y)) / (len(x) - 1)
+    else:
+        return math_exp_xy - math_expect_calculate(x) * math_expect_calculate(y)
 
 
-class NormalDistributionRandomValue:
-    def __init__(self, mu: float, sigma: float):
-        self.mu = mu
-        self.sigma = sigma
-        self.var = self.sigma ** 2
-
-    def distribution_density(self, x):
-        s = self.sigma
-        m = self.mu
-        return 1 / (s * np.sqrt(2 * math.pi)) * math.exp(-pow((x - m), 2) / 2 * pow(s, 2))
-
-    def z_calculate(self, x):
-        return round((x - self.mu) / self.sigma, 2)
-
-    def probability_calculate(self, x):
-        return stats.norm.cdf(self.z_calculate(x))
-
-
-class UniformDistributionRandomValue:
-    def __init__(self, left_board: float, right_board: float):
-        self.l = left_board
-        self.r = right_board
-        self.m = self.calculate_math_expect()
-        self.var = self.calculate_variance()
-        self.std = np.sqrt(self.var)
-
-    def calculate_math_expect(self):
-        return (self.l + self.r) / 2
-
-    def calculate_variance(self):
-        return pow((self.r - self.l), 2) / 12
-
-    def probability_calculate(self, x):
-        return (self.r - x) / (self.r - self.l)
+# # ------------------------------------------------classes--------------------------------------------------
+#
+#
+# class BinomialRandomValue:
+#     """определяет класс дискретных случайных величин, распределенных по Биномиальному закону
+#     n - количество испытаний
+#     p - вероятность наступления события в одном испытании
+#     """
+#
+#     def __init__(self, n: int, p: float):
+#         self.n = n
+#         self.p = p
+#         self.q = 1 - p
+#         self.math_expectation = self.n * self.p
+#         self.variance = self.n * self.p * self.q
+#         self.sd = math.sqrt(self.variance)
+#
+#     def probability_m(self, m):
+#         if self.n >= m >= 0:
+#             return my_combinations(self.n, m) * pow(self.p, m) * pow(self.q, self.n - m)
+#         elif m < 0:
+#             return "Число событий не может быть меньше нуля"
+#         else:
+#             return "Количество событий не может быть больше числа испытаний"
+#
+#     def __repr__(self):
+#         return f"М(Х): {self.math_expectation}, D(X): {self.variance}, StandDev: {self.sd}"
+#
+#
+# class PuassonRandomValue:
+#     """определяет класс дискретных случайных величин, распределенных по закону Пуассона
+#     lamb - средняя интенсивность наступления событий в единицу измерения
+#     """
+#
+#     def __init__(self, n=None, p=None, lamb=None):
+#         if n and p:
+#             self.lamb = n * p
+#         else:
+#             self.lamb = lamb
+#         self.math_expectation = self.lamb
+#         self.variance = self.lamb
+#         self.sd = math.sqrt(self.variance)
+#
+#     def probability_m(self, m):
+#         if m >= 0:
+#             return (pow(self.lamb, m) / my_factorial(m)) * math.exp(-self.lamb)
+#         else:
+#             return "Число событий не может быть меньше нуля"
+#
+#     def __repr__(self):
+#         return f"М(Х): {self.math_expectation}, D(X): {self.variance}, StandDev: {self.sd}"
+#
+#
+# class RandomSample:
+#     def __init__(self, sample: np.array):
+#         self.sample = sample
+#         self.math_expect = self.math_expect_calculate()
+#         self.variance_not_biased = self.variance_calculate(ddof=1)
+#         self.variance_biased = self.variance_calculate(ddof=0)
+#         self.std_not_biased = self.std_calculate(ddof=1)
+#         self.std_biased = self.std_calculate(ddof=0)
+#         self.median = self.median_calculate()
+#         self.moda = self.moda_calculate()
+#         self.spread = self.sample.max() - self.sample.min()
+#         self.quartiles = self.quartiles_calculate()
+#
+#     def __repr__(self):
+#         return f"Оценка математического ожидания: {self.math_expect}\n" \
+#                f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
+#                f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
+#                f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
+#                f"Смещенная оценка СКО: {self.std_biased}\n" \
+#                f"Медиана: {self.median}\n" \
+#                f"Мода: {self.moda}\n" \
+#                f"Размах: {self.spread}\n" \
+#                f"Квартили: {self.quartiles}\n"
+#
+#     def __str__(self):
+#         return f"Оценка математического ожидания: {self.math_expect}\n" \
+#                f"Несмещенная оценка дисперсии: {self.variance_not_biased}\n" \
+#                f"Смещенная оценка дисперсии: {self.variance_biased}\n" \
+#                f"Несмещенная оценка СКО: {self.std_not_biased}\n" \
+#                f"Смещенная оценка СКО: {self.std_biased}\n" \
+#                f"Медиана: {self.median}\n" \
+#                f"Мода: {self.moda}\n" \
+#                f"Размах: {self.spread}\n" \
+#                f"Квартили: {self.quartiles}\n"
+#
+#     def math_expect_calculate(self):
+#         return sum(self.sample) / len(self.sample)
+#
+#     def std_calculate(self, ddof=0):
+#         if ddof:
+#             result = np.sqrt(self.variance_not_biased)
+#         else:
+#             result = np.sqrt(self.variance_biased)
+#         return result
+#
+#     def variance_calculate(self, ddof=0):
+#         if ddof:
+#             result = sum(pow(self.sample - self.math_expect, 2)) / (len(self.sample) - 1)
+#         else:
+#             result = sum(pow(self.sample - self.math_expect, 2)) / len(self.sample)
+#         return result
+#
+#     def median_calculate(self):
+#         if len(self.sample) % 2:
+#             result = sorted(self.sample)[len(self.sample) // 2]
+#         else:
+#             result = (sorted(self.sample)[len(self.sample) // 2 - 1] + sorted(self.sample)[len(self.sample) // 2]) / 2
+#         return result
+#
+#     def moda_calculate(self):
+#         return np.argmax(np.bincount(self.sample))
+#
+#     def percentiles_calculate(self, percentiles: list):
+#         result = []
+#         sample = sorted(self.sample.copy())
+#         for percentile in [x / 100 for x in percentiles]:
+#             temp = percentile * len(sample)
+#             if int(temp) == temp:
+#                 temp = int(temp)
+#                 result.append((sample[temp - 1] + sample[temp]) / 2)
+#             else:
+#                 print(temp)
+#                 result.append((sample[int(temp) - 1] + sample[int(temp)]) / 2)
+#         return result
+#
+#     def quartiles_calculate(self):
+#         return self.percentiles_calculate([25, 50, 75])
+#
+#
+# class NormalDistributionRandomValue:
+#     def __init__(self, mu: float, sigma: float):
+#         self.mu = mu
+#         self.sigma = sigma
+#         self.var = self.sigma ** 2
+#
+#     def distribution_density(self, x):
+#         s = self.sigma
+#         m = self.mu
+#         return 1 / (s * np.sqrt(2 * math.pi)) * math.exp(-pow((x - m), 2) / 2 * pow(s, 2))
+#
+#     def z_calculate(self, x):
+#         return round((x - self.mu) / self.sigma, 2)
+#
+#     def probability_calculate(self, x):
+#         return stats.norm.cdf(self.z_calculate(x))
+#
+#
+# class UniformDistributionRandomValue:
+#     def __init__(self, left_board: float, right_board: float):
+#         self.l = left_board
+#         self.r = right_board
+#         self.m = self.calculate_math_expect()
+#         self.var = self.calculate_variance()
+#         self.std = np.sqrt(self.var)
+#
+#     def calculate_math_expect(self):
+#         return (self.l + self.r) / 2
+#
+#     def calculate_variance(self):
+#         return pow((self.r - self.l), 2) / 12
+#
+#     def probability_calculate(self, x):
+#         return (self.r - x) / (self.r - self.l)
