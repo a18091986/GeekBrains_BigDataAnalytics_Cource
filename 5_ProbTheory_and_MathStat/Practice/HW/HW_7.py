@@ -14,19 +14,16 @@ task = "Даны значения величины заработной плат
        "Произвести расчет как с использованием intercept, так и без."
 
 my_print(msg=task, separator_before=True, separator_after=False, color='зеленый')
-x = np.array([1, 2, 3, 4, 5])
+x = np.array([35, 45, 190, 200, 40, 70, 54, 150, 120, 110])
 
-y_true = 2 + 3 * x
+y_true = np.array([401, 574, 874, 919, 459, 739, 653, 902, 746, 832])
 
-b0_gd_int, b1_gd_int = grad_descent(b0_start=1, b1_start=2, x=x, y_true=y_true,
-                                    n_epoch=50000, lr=0.001)
-b0_gd_not_int, b1_gd_not_int = grad_descent(b0_start=0, b1_start=2, x=x, y_true=y_true,
-                                            n_epoch=50000, lr=0.001, intercept=False)
+b0_gd_int, b1_gd_int = grad_descent(b0_start=0.1, b1_start=0.1, x=x, y_true=y_true)
+b0_gd_not_int, b1_gd_not_int = grad_descent(b0_start=0.1, b1_start=0.1, x=x, y_true=y_true, intercept=False)
 b0_mnk_int, b1_mnk_int = koef_lin_regres_mnk_method_calculation(x, y_true)
 b0_mnk_not_int, b1_mnk_not_int = koef_lin_regres_mnk_method_calculation(x, y_true, intercept=False)
 b0_mk_int, b1_mk_int = koef_lin_regr_matrix_method_calculation(x, y_true)
 b0_mk_not_int, b1_mk_not_int = koef_lin_regr_matrix_method_calculation(x, y_true, intercept=False)
-
 
 my_print(msg=f"Коэффициенты ЛР методом градиентного спуска c intercept: {b0_gd_int, b1_gd_int}\n"
              f"Коэффициенты ЛР методом градиентного спуска без intercept: {b0_gd_not_int, b1_gd_not_int}\n"
@@ -35,8 +32,6 @@ my_print(msg=f"Коэффициенты ЛР методом градиентно
              f"Коэффициенты ЛР МНК c intercept: {b0_mnk_int, b1_mnk_int}\n"
              f"Коэффициенты ЛР МНК без intercept: {b0_mnk_not_int, b1_mnk_not_int}\n",
          color='синий')
-
-
 
 # ----------------------------------------------------------------------------------------------------------------
 task = "Посчитать коэффициент линейной регрессии при заработной плате (zp), \n" \

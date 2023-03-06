@@ -165,24 +165,35 @@ def koef_lin_regr_matrix_method_calculation(x: np.array, y: np.array, intercept=
 
 
 def grad_descent(b0_start: float, b1_start: float, x: np.array, y_true: np.array,
-                 lr=0.001, n_epoch=3000, intercept=True) -> (float, float):
+                 lr=5e-6, n_epoch=3000000, intercept=True) -> (float, float):
     n = len(y_true)
     b1 = b1_start
     if not intercept:
         b0 = 0
         for i in range(n_epoch):
             y_pred = b1 * x
-            derivative_b1 = -2 / n * np.sum(x * (y_true - y_pred))
+            derivative_b1 = 2 / n * np.sum(x * (y_pred - y_true))
             b1 -= lr * derivative_b1
+            if i % 100000 == 0:
+                my_print(msg=f'Iteration: {i}, b0: {b0}, b1: {b1}, mse: {mse_calculation(y_true, y_pred)}',
+                         separator_after=False, separator_before=False, color='белый')
     else:
         b0 = b0_start
         for i in range(n_epoch):
             y_pred = b0 + b1 * x
-            derivative_b0 = -2 / n * np.sum(y_true - y_pred)
-            derivative_b1 = -2 / n * np.sum(x * (y_true - y_pred))
+            derivative_b0 = 2 / n * np.sum(y_pred - y_true)
+            derivative_b1 = 2 / n * np.sum(x * (y_pred - y_true))
             b0 -= lr * derivative_b0
             b1 -= lr * derivative_b1
+            if i % 100000 == 0:
+                my_print(msg=f'Iteration: {i}, b0: {b0}, b1: {b1}, mse: {mse_calculation(y_true, y_pred)}',
+                         separator_after=False, separator_before=False, color='белый')
     return b0, b1
+
+
+def mse_calculation(y_true, y_pred):
+    return 1 / len(y_true) * np.sum((y_true - y_pred) ** 2)
+
 
 # # ------------------------------------------------classes--------------------------------------------------
 #
