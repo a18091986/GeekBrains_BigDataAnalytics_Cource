@@ -37,7 +37,6 @@
 			"driver": "mysql8",
 			"name": "192.168.2.159",
 			"save-password": true,
-			"read-only": true,
 			"configuration": {
 				"host": "192.168.2.159",
 				"port": "3306",
@@ -62,6 +61,21 @@
 				"type": "dev",
 				"auth-model": "native"
 			}
+		},
+		"mysql8-18742cf7f94-4b9c592e29d33e2e": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "193.168.49.33",
+			"save-password": true,
+			"configuration": {
+				"host": "iskandar_dash",
+				"port": "3306",
+				"url": "jdbc:mysql://iskandar_dash:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
 		}
 	},
 	"virtual-models": {
@@ -77,6 +91,22 @@
 				"properties": {
 					"erd.diagram.state": {
 						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301314\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"profiles\" fq-name\u003d\"profiles\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"545\" y\u003d\"55\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
+					}
+				}
+			}
+		},
+		"mysql8-1864d01a52a-65be454f65138637": {
+			"my_study": {
+				"@properties": {
+					"erd.diagram.state": {
+						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202303151638\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"mysql8-1864d01a52a-65be454f65138637\"\u003e\u003centity id\u003d\"1\" name\u003d\"base_categories\" fq-name\u003d\"my_study.base_categories\" order\u003d\"0\" x\u003d\"215\" y\u003d\"20\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"2\" name\u003d\"edu_materials\" fq-name\u003d\"my_study.edu_materials\" order\u003d\"1\" x\u003d\"215\" y\u003d\"228\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"3\" name\u003d\"edu_materials_result\" fq-name\u003d\"my_study.edu_materials_result\" order\u003d\"2\" x\u003d\"20\" y\u003d\"730\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"4\" name\u003d\"edu_materials_result_concat_multiple_values\" fq-name\u003d\"my_study.edu_materials_result_concat_multiple_values\" order\u003d\"3\" x\u003d\"480\" y\u003d\"155\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"5\" name\u003d\"material_category\" fq-name\u003d\"my_study.material_category\" order\u003d\"4\" x\u003d\"20\" y\u003d\"127\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"6\" name\u003d\"material_subject\" fq-name\u003d\"my_study.material_subject\" order\u003d\"5\" x\u003d\"20\" y\u003d\"250\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"7\" name\u003d\"material_tag\" fq-name\u003d\"my_study.material_tag\" order\u003d\"6\" x\u003d\"20\" y\u003d\"378\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"8\" name\u003d\"material_type\" fq-name\u003d\"my_study.material_type\" order\u003d\"7\" x\u003d\"20\" y\u003d\"501\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"9\" name\u003d\"subjects\" fq-name\u003d\"my_study.subjects\" order\u003d\"8\" x\u003d\"215\" y\u003d\"124\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"10\" name\u003d\"tags\" fq-name\u003d\"my_study.tags\" order\u003d\"9\" x\u003d\"215\" y\u003d\"522\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"11\" name\u003d\"type_of_material\" fq-name\u003d\"my_study.type_of_material\" order\u003d\"10\" x\u003d\"215\" y\u003d\"626\"\u003e\u003cpath name\u003d\"my_study\"/\u003e\u003c/entity\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations\u003e\u003crelation name\u003d\"material_category_ibfk_2\" fq-name\u003d\"my_study.material_category.material_category_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"1\" fk-ref\u003d\"5\"/\u003e\u003crelation name\u003d\"material_category_ibfk_1\" fq-name\u003d\"my_study.material_category.material_category_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"5\"/\u003e\u003crelation name\u003d\"material_subject_ibfk_1\" fq-name\u003d\"my_study.material_subject.material_subject_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"6\"/\u003e\u003crelation name\u003d\"material_tag_ibfk_1\" fq-name\u003d\"my_study.material_tag.material_tag_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"7\"/\u003e\u003crelation name\u003d\"material_type_ibfk_1\" fq-name\u003d\"my_study.material_type.material_type_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"8\"/\u003e\u003crelation name\u003d\"material_subject_ibfk_2\" fq-name\u003d\"my_study.material_subject.material_subject_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"9\" fk-ref\u003d\"6\"/\u003e\u003crelation name\u003d\"material_tag_ibfk_2\" fq-name\u003d\"my_study.material_tag.material_tag_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"10\" fk-ref\u003d\"7\"/\u003e\u003crelation name\u003d\"material_type_ibfk_2\" fq-name\u003d\"my_study.material_type.material_type_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"11\" fk-ref\u003d\"8\"/\u003e\u003c/relations\u003e\u003c/diagram\u003e"
+					}
+				}
+			},
+			"music_for_send": {
+				"@properties": {
+					"erd.diagram.state": {
+						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202304011542\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"mysql8-1864d01a52a-65be454f65138637\"\u003e\u003centity id\u003d\"1\" name\u003d\"channels\" fq-name\u003d\"music_for_send.channels\" order\u003d\"0\" x\u003d\"451\" y\u003d\"77\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"2\" name\u003d\"music\" fq-name\u003d\"music_for_send.music\" order\u003d\"1\" x\u003d\"188\" y\u003d\"20\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"3\" name\u003d\"music_result\" fq-name\u003d\"music_for_send.music_result\" order\u003d\"2\" x\u003d\"20\" y\u003d\"342\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"4\" name\u003d\"music_result_concat_multiple_values\" fq-name\u003d\"music_for_send.music_result_concat_multiple_values\" order\u003d\"3\" border-width\u003d\"3\" x\u003d\"188\" y\u003d\"342\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"5\" name\u003d\"music_tag\" fq-name\u003d\"music_for_send.music_tag\" order\u003d\"4\" x\u003d\"20\" y\u003d\"149\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003centity id\u003d\"6\" name\u003d\"tags\" fq-name\u003d\"music_for_send.tags\" order\u003d\"5\" x\u003d\"188\" y\u003d\"238\"\u003e\u003cpath name\u003d\"music_for_send\"/\u003e\u003c/entity\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations\u003e\u003crelation name\u003d\"music_ibfk_1\" fq-name\u003d\"music_for_send.music.music_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"1\" fk-ref\u003d\"2\"/\u003e\u003crelation name\u003d\"music_tag_ibfk_1\" fq-name\u003d\"music_for_send.music_tag.music_tag_ibfk_1\" type\u003d\"fk\" pk-ref\u003d\"2\" fk-ref\u003d\"5\"/\u003e\u003crelation name\u003d\"music_tag_ibfk_2\" fq-name\u003d\"music_for_send.music_tag.music_tag_ibfk_2\" type\u003d\"fk\" pk-ref\u003d\"6\" fk-ref\u003d\"5\"/\u003e\u003c/relations\u003e\u003c/diagram\u003e"
 					}
 				}
 			}
