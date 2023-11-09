@@ -70,6 +70,34 @@
 				},
 				"auth-model": "native"
 			}
+		},
+		"mysql8-1877ef60994-6f6159a82f2582e4": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "beget_my",
+			"save-password": true,
+			"configuration": {
+				"host": "45.141.78.116",
+				"port": "3306",
+				"url": "jdbc:mysql://45.141.78.116:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"sqlite_jdbc-188b120b3c0-59329b6f8cb302ce": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "graph_db.db",
+			"save-password": true,
+			"configuration": {
+				"database": "C:\\Users\\admin\\Desktop\\!Actual GIT\\WORK_GENERAL\\Graph\\!Main\\database\\graph_db.db",
+				"url": "jdbc:sqlite:C:\\Users\\admin\\Desktop\\!Actual GIT\\WORK_GENERAL\\Graph\\!Main\\database\\graph_db.db",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
 		}
 	},
 	"virtual-models": {

@@ -4,7 +4,7 @@
 		"mysql8-185b70e793b-4b08f04f7d8a08e8": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "192.168.2.165",
+			"name": "VM_local",
 			"save-password": true,
 			"configuration": {
 				"host": "192.168.2.165",
@@ -19,23 +19,10 @@
 				"SQLEditor.outputPanel.autoShow": "false"
 			}
 		},
-		"sqlite_jdbc-185fd44cb34-4cec88be32e334b9": {
-			"provider": "sqlite",
-			"driver": "sqlite_jdbc",
-			"name": "vk.db",
-			"save-password": true,
-			"configuration": {
-				"database": "C:\\Users\\admin\\Desktop\\!Actual GIT\\GeekBrains_BigDataAnalytics_Cource\\1_DBMS. MySQL\\2 DB Design\\sqlite3_db\\vk.db",
-				"url": "jdbc:sqlite:C:\\Users\\admin\\Desktop\\!Actual GIT\\GeekBrains_BigDataAnalytics_Cource\\1_DBMS. MySQL\\2 DB Design\\sqlite3_db\\vk.db",
-				"configurationType": "MANUAL",
-				"type": "dev",
-				"auth-model": "native"
-			}
-		},
 		"mysql8-1864d01a52a-65be454f65138637": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "192.168.2.159",
+			"name": "Monoblok_local",
 			"save-password": true,
 			"configuration": {
 				"host": "192.168.2.159",
@@ -50,7 +37,7 @@
 		"mysql8-1864d01ed61-6bc2a60995873683": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "46.8.219.63",
+			"name": "Monoblok_from_inet",
 			"save-password": true,
 			"configuration": {
 				"host": "46.8.219.63",
@@ -65,12 +52,34 @@
 		"mysql8-18742cf7f94-4b9c592e29d33e2e": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "193.168.49.33",
+			"name": "Dash_Iskandar",
 			"save-password": true,
 			"configuration": {
-				"host": "iskandar_dash",
+				"host": "193.168.49.33",
 				"port": "3306",
-				"url": "jdbc:mysql://iskandar_dash:3306/",
+				"url": "jdbc:mysql://193.168.49.33:3306/",
+				"configurationType": "MANUAL",
+				"home": "mysql_client",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"rewriteBatchedStatements": "true",
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
+					"allowPublicKeyRetrieval": "true",
+					"useSSL": "false"
+				},
+				"auth-model": "native"
+			}
+		},
+		"mysql8-1877ef60994-6f6159a82f2582e4": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "beget_my",
+			"save-password": true,
+			"configuration": {
+				"host": "45.141.78.116",
+				"port": "3306",
+				"url": "jdbc:mysql://45.141.78.116:3306/",
 				"configurationType": "MANUAL",
 				"home": "mysql_client",
 				"type": "dev",
@@ -79,22 +88,6 @@
 		}
 	},
 	"virtual-models": {
-		"sqlite_jdbc-185fd44cb34-4cec88be32e334b9": {
-			":users": {
-				"properties": {
-					"erd.diagram.state": {
-						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301253\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"users\" fq-name\u003d\"users\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"542\" y\u003d\"190\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
-					}
-				}
-			},
-			":profiles": {
-				"properties": {
-					"erd.diagram.state": {
-						"serialized": "\u003cdiagram version\u003d\"1\" name\u003d\"empty\" time\u003d\"202301301314\"\u003e\u003centities\u003e\u003cdata-source id\u003d\"sqlite_jdbc-185fd44cb34-4cec88be32e334b9\"\u003e\u003centity id\u003d\"1\" name\u003d\"profiles\" fq-name\u003d\"profiles\" order\u003d\"0\" color-bg\u003d\"255,128,64\" border-width\u003d\"3\" x\u003d\"545\" y\u003d\"55\"/\u003e\u003c/data-source\u003e\u003c/entities\u003e\u003crelations/\u003e\u003c/diagram\u003e"
-					}
-				}
-			}
-		},
 		"mysql8-1864d01a52a-65be454f65138637": {
 			"my_study": {
 				"@properties": {
